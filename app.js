@@ -9,6 +9,7 @@ const app = express();
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, () => console.log("Connected to db."));
 
 app.use(express.json());
+app.use(express.static("./client/build"))
 
 app.post("/url", async (req, res) => {
   const newUrl = new url({ original: req.body.url })
@@ -26,7 +27,6 @@ app.get("/:id", async (req, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("./client/build"))
 }
 
 app.listen(process.env.PORT || 5050, () => console.log("Listening on port 5050"));
