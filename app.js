@@ -21,7 +21,7 @@ app.post("/url", async (req, res) => {
 app.get("/:id", async (req, res) => {
   const shortUrl = await url.findOne({ short: req.params.id });
   console.log(shortUrl);
-  if (!shortUrl) return r; es.status(404).send("404 - Page not found 😢");
+  if (!shortUrl) return res.status(404).send("404 - Page not found 😢");
 
   res.redirect(shortUrl.original);
 });
